@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ageCalculator</string>
+    <string name="enter_age_text">Please enter your age (in years)</string>
+    <string name="confirm_text_button">Confirm</string>
+    <string name="your_age_text">Your age:</string>
+    <string name="calc_days">days</string>
+    <string name="calc_seconds">seconds</string>
+    <string name="calc_weeks">weeks</string>
+    <string name="calc_months">months</string>
+    <string name="calc_years">years</string>
+</resources>
