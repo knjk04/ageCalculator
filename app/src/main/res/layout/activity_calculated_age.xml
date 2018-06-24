@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
         android:text="@string/calc_seconds"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/daysTextView"
