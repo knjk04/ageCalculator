@@ -2,6 +2,13 @@
 A simple android app that informs you of your age in days, weeks, months & seconds.
 You enter in your age in years
 
+** Screenshots
+   [[file:repoMedia/first-screen.png][First Screen]
+   [[file:repoMedia/second-screen.png][Second Screen]
+
+** Known devices
+   - Tested on a Pixel XL (Android 9, API 28)
+
 * Future plans
 - [ ] Let the user input their date and birth, and then calculate the age based on that (instead of
-  based on someone's age in years, which leads to a crude approximation)
+  based on someone's age in years, which leads to a crude approximation
