@@ -3,8 +3,9 @@ A simple android app that informs you of your age in days, weeks, months & secon
 You enter in your age in years
 
 ** Screenshots
-   [file:repoMedia/first-screen.png]
-   [file:repoMedia/second-screen.png]
+   [[[[file:repoMedia/first-screen.png]]]]
+
+   [[file:repoMedia/second-screen.png]]
 
 ** Known devices
    - Tested on a Pixel XL (Android 9, API 28)
