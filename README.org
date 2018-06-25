@@ -5,7 +5,7 @@ You enter in your age using the in-built calendar (CalendarView)
 *Min SDK version: API level 26* (using the Java Date and Time API, but I could potentially support older APIs in the future if I used Joda)
 
 ** Screenshots 
-   [[file:repoMedia/new-age-calculator-screenshots.png]]
+   [[file:repoMedia/screens.png]]
 
 ** Devices tested on
    #+CAPTION: Tested devices
