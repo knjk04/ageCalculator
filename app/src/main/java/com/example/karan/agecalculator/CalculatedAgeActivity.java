@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CalculatedAgeActivity extends AppCompatActivity {
 
     public static final String TAG = CalculatedAgeActivity.class.getSimpleName();
@@ -13,35 +19,122 @@ public class CalculatedAgeActivity extends AppCompatActivity {
     private TextView mWeeksTextView;
     private TextView mMonthsTextView;
     private TextView mSecondsTextView;
+    Calendar mNow = Calendar.getInstance();
+    private int[] mDates;
+    private static final int DAY_INDEX = 0;
+    private static final int MONTH_INDEX = 1;
+    private static final int YEAR_INDEX = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculated_age);
 
-        final int DAYS_IN_A_YEAR = 365;
-        final float WEEKS_IN_A_YEAR = 52.1429f;
-        final int MONTHS_IN_A_YEAR = 12;
-        final double SECONDS_IN_A_YEAR = 3.154e7;
-
         Intent intent = getIntent();
-        String age = intent.getStringExtra("date");
-        Log.d(TAG, age);
+        mDates = intent.getIntArrayExtra("dates");
 
         mDaysTextView = findViewById(R.id.daysTextView);
+        //using getText() to prepend onto it later
         String strAgeInDays = " " + mDaysTextView.getText().toString();
-        mDaysTextView.setText(age*DAYS_IN_A_YEAR + strAgeInDays);
+        mDaysTextView.setText(getDiffInDays() + strAgeInDays);
 
         mWeeksTextView = findViewById(R.id.weeksTextView);
+        //using getText() to prepend onto it later
         String strAgeInWeeks = " " + mWeeksTextView.getText().toString();
-        mWeeksTextView.setText(age*WEEKS_IN_A_YEAR + strAgeInWeeks);
+        mWeeksTextView.setText(getDiffInWeeks() + strAgeInWeeks);
 
         mMonthsTextView = findViewById(R.id.monthsTextView);
         String strAgeInMonths = " " + mMonthsTextView.getText().toString();
-        mMonthsTextView.setText(age*MONTHS_IN_A_YEAR + strAgeInMonths);
+        mMonthsTextView.setText(getDiffInMonths() + strAgeInMonths);
 
         mSecondsTextView = findViewById(R.id.secondsTextView);
         String strAgeInSeconds = " " + mSecondsTextView.getText().toString();
-        mSecondsTextView.setText(age*SECONDS_IN_A_YEAR + strAgeInSeconds);
+        mSecondsTextView.setText(getDiffInSeconds() + strAgeInSeconds);
+    }
+
+    public long getDiffInDays() {
+        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
+//        Log.d(TAG, "current month: " + currentMonth);
+
+        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
+//        Log.d(TAG, "current day: " + currentDayOfYear);
+
+        int currentYear = mNow.get(Calendar.YEAR);
+//        Log.d(TAG, "current year: " + currentYear);
+
+        LocalDate startDate = LocalDate.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX], mDates[DAY_INDEX]);
+        LocalDate endDate = LocalDate.of(currentYear, currentMonth, currentDayOfMonth);
+
+        long daysDiff = ChronoUnit.DAYS.between(startDate, endDate);
+        Log.d(TAG, "days diff: " + daysDiff);
+
+        return daysDiff;
+    }
+
+    public long getDiffInMonths() {
+        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
+//        Log.d(TAG, "current month: " + currentMonth);
+
+        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
+//        Log.d(TAG, "current day: " + currentDayOfYear);
+
+        int currentYear = mNow.get(Calendar.YEAR);
+//        Log.d(TAG, "current year: " + currentYear);
+
+        LocalDate startDate = LocalDate.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX], mDates[DAY_INDEX]);
+        LocalDate endDate = LocalDate.of(currentYear, currentMonth, currentDayOfMonth);
+
+        long monthsDiff = ChronoUnit.MONTHS.between(startDate, endDate);
+        Log.d(TAG, "months diff: " + monthsDiff);
+
+        return monthsDiff;
+    }
+
+    public long getDiffInSeconds() {
+        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
+//        Log.d(TAG, "current month: " + currentMonth);
+
+        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
+//        Log.d(TAG, "current day: " + currentDayOfYear);
+
+        int currentYear = mNow.get(Calendar.YEAR);
+//        Log.d(TAG, "current year: " + currentYear);
+
+        LocalDateTime startDate = LocalDateTime.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX],
+                                                   mDates[DAY_INDEX], 0, 0, 0);
+        LocalDateTime endDate = LocalDateTime.of(currentYear, currentMonth, currentDayOfMonth,
+                                                 mNow.get(Calendar.HOUR_OF_DAY),
+                                                 mNow.get(Calendar.MINUTE),
+                                                 mNow.get(Calendar.SECOND));
+
+//        long secondsDiff = ChronoUnit.SECONDS.between(startDate, endDate);
+
+
+        LocalDateTime temp = LocalDateTime.from(startDate);
+
+
+        long secondsDiff = temp.until(endDate, ChronoUnit.SECONDS);
+        Log.d(TAG, "seconds diff: " + secondsDiff);
+
+        return secondsDiff;
+    }
+
+    public long getDiffInWeeks() {
+        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
+//        Log.d(TAG, "current month: " + currentMonth);
+
+        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
+//        Log.d(TAG, "current day: " + currentDayOfYear);
+
+        int currentYear = mNow.get(Calendar.YEAR);
+//        Log.d(TAG, "current year: " + currentYear);
+
+        LocalDate startDate = LocalDate.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX], mDates[DAY_INDEX]);
+        LocalDate endDate = LocalDate.of(currentYear, currentMonth, currentDayOfMonth);
+
+        long weeksDiff = ChronoUnit.WEEKS.between(startDate, endDate);
+        Log.d(TAG, "weeks diff: " + weeksDiff);
+
+        return weeksDiff;
     }
 }

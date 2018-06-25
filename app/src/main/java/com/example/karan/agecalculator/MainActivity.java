@@ -26,16 +26,20 @@ public class MainActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                month++; //0 indexed
                 String date = day + "/" + month + "/" + year;
-//                Log.d(TAG, "onSelectedDayChange: date : " + date);
-                startCalc(date);
+                Log.d(TAG, "onSelectedDayChange: date : " + date);
+
+                int selectedDates[] = {day, month, year};
+                startCalc(selectedDates);
             }
         });
     }
 
-    private void startCalc(String date) {
+    private void startCalc(int[] selectedDates) {
         Intent intent = new Intent(this, CalculatedAgeActivity.class);
-        intent.putExtra("date", date);
+//        intent.putExtra("date", date);
+        intent.putExtra("dates", selectedDates);
         startActivity(intent);
     }
 }
