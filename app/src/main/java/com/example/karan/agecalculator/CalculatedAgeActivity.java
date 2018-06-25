@@ -25,8 +25,8 @@ public class CalculatedAgeActivity extends AppCompatActivity {
         final double SECONDS_IN_A_YEAR = 3.154e7;
 
         Intent intent = getIntent();
-        int age = intent.getIntExtra("age",3);
-        Log.d(TAG, age+"");
+        String age = intent.getStringExtra("date");
+        Log.d(TAG, age);
 
         mDaysTextView = findViewById(R.id.daysTextView);
         String strAgeInDays = " " + mDaysTextView.getText().toString();

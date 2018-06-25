@@ -1,40 +1,41 @@
 package com.example.karan.agecalculator;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText ageField;
-    private Button confirmButton;
+    private CalendarView calendarView;
+
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ageField = findViewById(R.id.ageEditText);
-        confirmButton = findViewById(R.id.confirmButton);
-
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+        calendarView = findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onClick(View view) {
-                int ageYears = Integer.parseInt(ageField.getText().toString());
-//                Toast.makeText(MainActivity.this, ageYears+"", Toast.LENGTH_LONG).show();
-
-                startCalc(ageYears);
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                String date = day + "/" + month + "/" + year;
+//                Log.d(TAG, "onSelectedDayChange: date : " + date);
+                startCalc(date);
             }
         });
     }
 
-    private void startCalc(int ageYears) {
+    private void startCalc(String date) {
         Intent intent = new Intent(this, CalculatedAgeActivity.class);
-        intent.putExtra("age", ageYears);
+        intent.putExtra("date", date);
         startActivity(intent);
     }
 }
