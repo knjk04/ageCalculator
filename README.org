@@ -2,16 +2,17 @@
 A simple android app that informs you of your age in days, weeks, months & seconds.
 You enter in your age in years
 
-** Screenshots
-   [[file:repoMedia/age-calculator-screenshots.png]]
+*Min SDK version: API level 26* (using the Java Date and Time API, but I could potentially support older APIs in the future if I used Joda)
+
+** Screenshots 
+   /I'll add the new screenshots once I get it working/
 
 ** Devices tested on
    #+CAPTION: Tested devices
 |   | Device     | Android version | API Level |
 |---+------------+-----------------+-----------|
 | 1 | Pixel XL   |               9 |        28 |
-| 2 | OnePlus 3T |           7.1.1 |        25 |
 
-* Future plans
-- Let the user input their date and birth, and then calculate the age based on that (instead of
-  based on someone's age in years, which leads to a crude approximation
+* Currently working on...
+- Letting the user input their date and birth, and then calculate the age based on that (instead of
+  based on someone's age in years, which leads to a crude approximation)
