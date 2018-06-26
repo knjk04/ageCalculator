@@ -1,8 +1,9 @@
 * Age calculator
-A simple android app that informs you of your age in days, weeks, months & seconds.
-You enter in your age using the in-built calendar (CalendarView)
+  A simple android app that informs you of your age in days, weeks, months & seconds.
+  You enter in your age using the in-built calendar (DatePicker)
 
-*Min SDK version: API level 26* (using the Java Date and Time API, but I could potentially support older APIs in the future if I used Joda)
+  *Min SDK version: API level 26* (using the Java Date and Time API, but I could potentially 
+  support older APIs in the future if I used Joda)
 
 ** In action
    [[file:repoMedia/screen-record-half-size.gif]]
