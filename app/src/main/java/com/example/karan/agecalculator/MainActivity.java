@@ -8,12 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class MainActivity extends AppCompatActivity {
 
-    private CalendarView calendarView;
+    private DatePicker datePicker;
+//    private CalendarView calendarView;
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -22,18 +27,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        calendarView = findViewById(R.id.calendarView);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                month++; //0 indexed
-                String date = day + "/" + month + "/" + year;
-                Log.d(TAG, "onSelectedDayChange: date : " + date);
+        datePicker = findViewById(R.id.datePicker);
 
-                int selectedDates[] = {day, month, year};
-                startCalc(selectedDates);
-            }
-        });
+        TimeZone timeZone = TimeZone.getDefault();
+//        datePicker.setMaxDate();
+
+
+
+//        calendarView = findViewById(R.id.calendarView);
+//        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+//            @Override
+//            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+//                month++; //0 indexed
+//                String date = day + "/" + month + "/" + year;
+//                Log.d(TAG, "onSelectedDayChange: date : " + date);
+//
+//                int selectedDates[] = {day, month, year};
+//                startCalc(selectedDates);
+//            }
+//        });
     }
 
     private void startCalc(int[] selectedDates) {
