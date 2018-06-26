@@ -35,6 +35,17 @@ public class MainActivity extends AppCompatActivity {
         cal.add(Calendar.YEAR, -minAge);
         datePicker.setMaxDate(cal.getTimeInMillis());
 
+        datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker datePicker, int year, int month, int day) {
+                month++; //0 indexed
+                String date = day + "/" + month + "/" + year;
+                Log.d(TAG, "onSelectedDayChange: date : " + date);
+
+                int selectedDates[] = {day, month, year};
+                startCalc(selectedDates);
+            }
+        });
 
 
 
@@ -54,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void startCalc(int[] selectedDates) {
         Intent intent = new Intent(this, CalculatedAgeActivity.class);
-//        intent.putExtra("date", date);
         intent.putExtra("dates", selectedDates);
         startActivity(intent);
     }
