@@ -29,8 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         datePicker = findViewById(R.id.datePicker);
 
-        TimeZone timeZone = TimeZone.getDefault();
-//        datePicker.setMaxDate();
+        //Set max date to be 3 years prior
+        int minAge = 3; //min age is 3 years old
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -minAge);
+        datePicker.setMaxDate(cal.getTimeInMillis());
+
 
 
 
