@@ -12,6 +12,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.karan.agecalculator.DifferenceIn.SECONDS;
+
 public class CalculatedAgeActivity extends AppCompatActivity {
 
     public static final String TAG = CalculatedAgeActivity.class.getSimpleName();
@@ -36,23 +38,23 @@ public class CalculatedAgeActivity extends AppCompatActivity {
         mDaysTextView = findViewById(R.id.daysTextView);
         //using getText() to prepend onto it later
         String strAgeInDays = " " + mDaysTextView.getText().toString();
-        mDaysTextView.setText(getDiffInDays() + strAgeInDays);
+        mDaysTextView.setText(getDiff(DifferenceIn.DAYS) + strAgeInDays);
 
         mWeeksTextView = findViewById(R.id.weeksTextView);
         //using getText() to prepend onto it later
         String strAgeInWeeks = " " + mWeeksTextView.getText().toString();
-        mWeeksTextView.setText(getDiffInWeeks() + strAgeInWeeks);
+        mWeeksTextView.setText(getDiff(DifferenceIn.WEEKS) + strAgeInWeeks);
 
         mMonthsTextView = findViewById(R.id.monthsTextView);
         String strAgeInMonths = " " + mMonthsTextView.getText().toString();
-        mMonthsTextView.setText(getDiffInMonths() + strAgeInMonths);
+        mMonthsTextView.setText(getDiff(DifferenceIn.MONTHS) + strAgeInMonths);
 
         mSecondsTextView = findViewById(R.id.secondsTextView);
         String strAgeInSeconds = " " + mSecondsTextView.getText().toString();
-        mSecondsTextView.setText(getDiffInSeconds() + strAgeInSeconds);
+        mSecondsTextView.setText(getDiff(DifferenceIn.SECONDS) + strAgeInSeconds);
     }
 
-    public long getDiffInDays() {
+    public long getDiff(DifferenceIn duration) {
         int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
 //        Log.d(TAG, "current month: " + currentMonth);
 
@@ -65,76 +67,41 @@ public class CalculatedAgeActivity extends AppCompatActivity {
         LocalDate startDate = LocalDate.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX], mDates[DAY_INDEX]);
         LocalDate endDate = LocalDate.of(currentYear, currentMonth, currentDayOfMonth);
 
-        long daysDiff = ChronoUnit.DAYS.between(startDate, endDate);
-        Log.d(TAG, "days diff: " + daysDiff);
+        long diff = 0; //default value
 
-        return daysDiff;
-    }
+        switch (duration) {
+            case SECONDS:
+                LocalDateTime startDateSec = LocalDateTime.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX],
+                        mDates[DAY_INDEX], 0, 0, 0);
 
-    public long getDiffInMonths() {
-        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
-//        Log.d(TAG, "current month: " + currentMonth);
+                LocalDateTime endDateSec = LocalDateTime.of(currentYear, currentMonth,
+                        currentDayOfMonth,
+                        mNow.get(Calendar.HOUR_OF_DAY),
+                        mNow.get(Calendar.MINUTE),
+                        mNow.get(Calendar.SECOND));
 
-        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
-//        Log.d(TAG, "current day: " + currentDayOfYear);
+                LocalDateTime temp = LocalDateTime.from(startDateSec);
 
-        int currentYear = mNow.get(Calendar.YEAR);
-//        Log.d(TAG, "current year: " + currentYear);
+                diff = temp.until(endDateSec, ChronoUnit.SECONDS);
+                Log.d(TAG, "seconds diff: " + diff);
+                break;
 
-        LocalDate startDate = LocalDate.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX], mDates[DAY_INDEX]);
-        LocalDate endDate = LocalDate.of(currentYear, currentMonth, currentDayOfMonth);
+            case DAYS:
+                diff = ChronoUnit.DAYS.between(startDate, endDate);
+                Log.d(TAG, "days diff: " + diff);
+                break;
 
-        long monthsDiff = ChronoUnit.MONTHS.between(startDate, endDate);
-        Log.d(TAG, "months diff: " + monthsDiff);
+            case WEEKS:
+                diff = ChronoUnit.WEEKS.between(startDate, endDate);
+                Log.d(TAG, "weeks diff: " + diff);
+                break;
 
-        return monthsDiff;
-    }
+            case MONTHS:
+                diff = ChronoUnit.MONTHS.between(startDate, endDate);
+                Log.d(TAG, "months diff: " + diff);
+                break;
+        }
 
-    public long getDiffInSeconds() {
-        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
-//        Log.d(TAG, "current month: " + currentMonth);
-
-        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
-//        Log.d(TAG, "current day: " + currentDayOfYear);
-
-        int currentYear = mNow.get(Calendar.YEAR);
-//        Log.d(TAG, "current year: " + currentYear);
-
-        LocalDateTime startDate = LocalDateTime.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX],
-                                                   mDates[DAY_INDEX], 0, 0, 0);
-        LocalDateTime endDate = LocalDateTime.of(currentYear, currentMonth, currentDayOfMonth,
-                                                 mNow.get(Calendar.HOUR_OF_DAY),
-                                                 mNow.get(Calendar.MINUTE),
-                                                 mNow.get(Calendar.SECOND));
-
-//        long secondsDiff = ChronoUnit.SECONDS.between(startDate, endDate);
-
-
-        LocalDateTime temp = LocalDateTime.from(startDate);
-
-
-        long secondsDiff = temp.until(endDate, ChronoUnit.SECONDS);
-        Log.d(TAG, "seconds diff: " + secondsDiff);
-
-        return secondsDiff;
-    }
-
-    public long getDiffInWeeks() {
-        int currentMonth = mNow.get(Calendar.MONTH)+1; //+1 since months are 0 indexed
-//        Log.d(TAG, "current month: " + currentMonth);
-
-        int currentDayOfMonth = mNow.get(Calendar.DAY_OF_MONTH);
-//        Log.d(TAG, "current day: " + currentDayOfYear);
-
-        int currentYear = mNow.get(Calendar.YEAR);
-//        Log.d(TAG, "current year: " + currentYear);
-
-        LocalDate startDate = LocalDate.of(mDates[YEAR_INDEX], mDates[MONTH_INDEX], mDates[DAY_INDEX]);
-        LocalDate endDate = LocalDate.of(currentYear, currentMonth, currentDayOfMonth);
-
-        long weeksDiff = ChronoUnit.WEEKS.between(startDate, endDate);
-        Log.d(TAG, "weeks diff: " + weeksDiff);
-
-        return weeksDiff;
+        return diff;
     }
 }
