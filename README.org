@@ -4,8 +4,8 @@ You enter in your age using the in-built calendar (CalendarView)
 
 *Min SDK version: API level 26* (using the Java Date and Time API, but I could potentially support older APIs in the future if I used Joda)
 
-** In action...
-   file:repoMedia/screen-record.gif
+** In action
+   [[file:repoMedia/screen-record.gif]]
 
    [[file:repoMedia/screens.png]]
 
