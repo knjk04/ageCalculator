@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,10 +17,6 @@ import java.util.List;
 public class CalculatedAgeActivity extends AppCompatActivity {
 
     public static final String TAG = CalculatedAgeActivity.class.getSimpleName();
-    private TextView mDaysTextView;
-    private TextView mWeeksTextView;
-    private TextView mMonthsTextView;
-    private TextView mSecondsTextView;
     Calendar mNow = Calendar.getInstance();
     private int[] mDates;
     private static final int DAY_INDEX = 0;
@@ -31,10 +26,10 @@ public class CalculatedAgeActivity extends AppCompatActivity {
     private List<ConvertedVal> mConversionList;
     private RecyclerView recyclerView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_calculated_age);
         setContentView(R.layout.recyclerview_activity);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -46,24 +41,6 @@ public class CalculatedAgeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mDates = intent.getIntArrayExtra("dates");
-
-//        mDaysTextView = findViewById(R.id.daysTextView);
-//        //using getText() to prepend onto it later
-//        String strAgeInDays = " " + mDaysTextView.getText().toString();
-//        mDaysTextView.setText(getDiff(DifferenceIn.DAYS) + strAgeInDays);
-//
-//        mWeeksTextView = findViewById(R.id.weeksTextView);
-//        //using getText() to prepend onto it later
-//        String strAgeInWeeks = " " + mWeeksTextView.getText().toString();
-//        mWeeksTextView.setText(getDiff(DifferenceIn.WEEKS) + strAgeInWeeks);
-//
-//        mMonthsTextView = findViewById(R.id.monthsTextView);
-//        String strAgeInMonths = " " + mMonthsTextView.getText().toString();
-//        mMonthsTextView.setText(getDiff(DifferenceIn.MONTHS) + strAgeInMonths);
-//
-//        mSecondsTextView = findViewById(R.id.secondsTextViewCard);
-//        String strAgeInSeconds = " " + mSecondsTextView.getText().toString();
-//        mSecondsTextView.setText(getDiff(DifferenceIn.SECONDS) + strAgeInSeconds);
 
         initialiseData();
         initialiseAdapter();
@@ -122,13 +99,15 @@ public class CalculatedAgeActivity extends AppCompatActivity {
 
     private void initialiseData() {
         mConversionList = new ArrayList<>();
-        mConversionList.add(new ConvertedVal(" " + getDiff(DifferenceIn.DAYS), "days"));
+        mConversionList.add(new ConvertedVal(" " + getDiff(DifferenceIn.MONTHS), "months"));
         mConversionList.add(new ConvertedVal(" " + getDiff(DifferenceIn.WEEKS), "weeks"));
+        mConversionList.add(new ConvertedVal(" " + getDiff(DifferenceIn.DAYS), "days"));
+        mConversionList.add(new ConvertedVal(" " + getDiff(DifferenceIn.SECONDS), "seconds"));
     }
 
     private void initialiseAdapter() {
 //        Log.d(TAG, "in initialiseAdapter()");
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mConversionList);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,mConversionList);
         recyclerView.setAdapter(adapter);
     }
 }
