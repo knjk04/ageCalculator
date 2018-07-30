@@ -7,9 +7,9 @@
 
   /Please note that the video and screenshot below are reflective of the app on the master branch (and not necessarily this branch)/
 
-   [[file:repoMedia/screen-record-half-size.gif]]
+   [[file:repoMedia/screen-record.gif]]
 
-   [[file:repoMedia/screens.png]]
+   [[file:repoMedia/bothScreens.png]]
 
 ** Devices tested on
    #+CAPTION: Tested devices

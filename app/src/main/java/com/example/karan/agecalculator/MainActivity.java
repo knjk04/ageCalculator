@@ -1,13 +1,17 @@
 package com.example.karan.agecalculator;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
+
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,29 +29,36 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.confirmButton);
 
         //Set max date to be 3 years prior
-        int minAge = 3; //min age is 3 years old
-        Calendar cal = Calendar.getInstance();
+        final int minAge = 3; //min age is 3 years old
+        final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -minAge);
         datePicker.setMaxDate(cal.getTimeInMillis());
 
-        datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+
+        button.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onDateChanged(DatePicker datePicker, int year, int month, int day) {
-                month++; //0 indexed
-                String date = day + "/" + month + "/" + year;
-                Log.d(TAG, "onSelectedDayChange: date : " + date);
+            public void onClick(View view) {
+                int dayPicked = datePicker.getDayOfMonth();
+                int monthPicked = datePicker.getMonth() + 1; //0 indexed
+                int yearPicked = datePicker.getYear();
+                final int selectedDates[] = {dayPicked, monthPicked, yearPicked};
 
-                final int selectedDates[] = {day, month, year};
+                Log.d(TAG, "Day: " + dayPicked + ", Month: " + monthPicked + ", Year: " + yearPicked);
+                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-                button.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startCalc(selectedDates);
-                    }
-                });
-
+                if (currentYear - yearPicked <= minAge) {
+                    showErrorMsg(view);
+                } else {
+                    startCalc(selectedDates);
+                }
             }
         });
+    }
+
+    private void showErrorMsg(View view) {
+        Snackbar snackbar = Snackbar.make(view, "Sorry, you are too young " +
+                "to use this app", Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     private void startCalc(int[] selectedDates) {

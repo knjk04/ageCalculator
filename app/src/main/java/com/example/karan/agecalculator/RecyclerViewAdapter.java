@@ -35,11 +35,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Conve
 
     @Override
     public void onBindViewHolder(ConversionViewHolder conversionViewHolder, int i) {
-//        conversionViewHolder.conversion.setText(convertedVals.get(i).strCalculatedValue + " " +
-//                                                convertedVals.get(i).strUnit);
-
         ConvertedVal convertedVal = convertedVals.get(i);
-
         conversionViewHolder.conversion.setText(convertedVal.getStrCalculatedValue() + " " +
                                                 convertedVal.getStrUnit());
     }
