@@ -1,7 +1,0 @@
-* Age calculator
-A simple android app that informs you of your age in days, weeks, months & seconds.
-You enter in your age in years
-
-* Future plans
-- [ ] Let the user input their date and birth, and then calculate the age based on that (instead of
-  based on someone's age in years, which leads to a crude approximation)
