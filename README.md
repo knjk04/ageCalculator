@@ -1,4 +1,9 @@
 # Age calculator
+ <p align="center">
+	<img src="/repoMedia/ageCalculator_icon_512.png" alt="App icon"/>
+  </p>
+  
+  
   A simple android app that informs you of your age in days, weeks, months & seconds.
   You enter in your age using the in-built calendar (DatePicker)
 
