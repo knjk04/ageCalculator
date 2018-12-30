@@ -14,7 +14,7 @@
 
    ![Screenshots of app](/repoMedia/bothScreens.png)
 
-** Devices tested on
+# Devices tested on
       
    Device   | Android version | API level (if known) |
    ---------|-----------------|----------------------|
