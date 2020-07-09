@@ -10,7 +10,7 @@
   *Min SDK version: API level 26* (using the Java Date and Time API, but I could potentially 
   support older APIs in the future if I used Joda)
 
-  /Please note that the video and screenshot below are reflective of the app on the master branch (and not necessarily this branch)/
+  *Please note that the video and screenshot below are reflective of the app on the master branch (and not necessarily this branch)*
 
    ![Screenshots of app](/repoMedia/bothScreens.png)
 
